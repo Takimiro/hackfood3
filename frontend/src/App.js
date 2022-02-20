@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import api from './api'
 function App() {
   const [products, setProducts] = useState([]);
+  const [restrictive, setRestrictive] = useState(false);
 
   useEffect(() => {
     getProducts();
@@ -11,9 +12,17 @@ function App() {
   });
 
   function getProducts(){
-    api.get(`/products`).then(response => {
-      setProducts(response.data)
-    })
+    if(!restrictive){
+      api.get(`/products`).then(response => {
+        setProducts(response.data)
+      })
+    } else{
+      api.get(`/restrictiveProducts`).then(response => {
+        setProducts(response.data)
+      })
+    }
+
+    
   }
 
 
@@ -29,8 +38,8 @@ function App() {
             </span>
             
             <div id="menu-options">
-              <Button>PRODUCTS</Button>
-              <Button>NON-RESTRICTIVE</Button>
+              <Button onClick={() => setRestrictive(false)}>PRODUCTS</Button>
+              <Button onClick={() => setRestrictive(true)}>NON-RESTRICTIVE</Button>
             </div>
           </div>
           

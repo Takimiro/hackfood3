@@ -21,6 +21,10 @@ app.get('/products', (_, res) => {
   res.send(products)
 })
 
+app.get('/restrictiveProducts', (_, res) => {
+  res.send(products.where((p) => p.restrictive))
+})
+
 app.delete('/deleteProduct', (req, res) => {
   const productId = req.body.id;
   const deletedProd = products.splice(products.findIndex((p) => p.id === productId), 1)
