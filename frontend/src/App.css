@@ -132,3 +132,18 @@ body{
   font-size: 30px;
   padding-left: 100px;
 } 
+
+#products{
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10%;
+  margin: 30px;
+}
+
+#product{
+  display: grid;
+  grid-auto-flow: row;
+  box-shadow: 5px 8px 10px 5px rgba(0, 0, 0, 0.137);
+  padding: 5px;
+  border-radius: 15px;
+}

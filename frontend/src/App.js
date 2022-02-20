@@ -3,7 +3,7 @@ import { Button, Layout, Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
 import api from './api'
 function App() {
-  const [products, setProducts] = useState(0);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     getProducts();
@@ -35,10 +35,16 @@ function App() {
           </div>
           
         </Menu>
-
-        <div id="product">
-          <img></img>
+        <div id="products">
+          {products.map((product) => {
+              return <div key={product.id} id="product">
+                <div>{product.name}</div>
+                <div>{product.description}</div>
+                <div>{product.price}R$</div>
+              </div>
+            })}
         </div>
+        
         <canvas id="background"></canvas>
       </Layout>
     </body>

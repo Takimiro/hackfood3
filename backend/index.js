@@ -13,6 +13,7 @@ app.post('/addProduct', (req, res) => {
   newProduct.id = idIterator;
   idIterator++;
   products.push(newProduct)
+  addRestrictions(newProduct)
   res.send(newProduct)
 })
 
@@ -34,3 +35,12 @@ app.delete('/deleteProduct', (req, res) => {
 app.listen(port, () => {
   console.log(`Hackafood is listening on port ${port}`)
 })
+
+function addRestrictions(product){
+  //TODO: You were supposed to use a natural language processing here :(
+  const badIgredients = ['milk', 'gluten', 'wheat']
+  if(product.description.split(' ').some(w => badIgredients.includes(w))){
+    product.restrictions = true;
+    products.splice(products.findIndex((p) => p.id === product.id), 1, product)
+  }
+}
